@@ -6,5 +6,7 @@ nltk
 Sastrawi
 joblib
 tensorflow-cpu
+plotly
+
 
 
