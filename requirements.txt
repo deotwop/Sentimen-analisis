@@ -1,18 +1,18 @@
 (# Requirements for Sentimen Analisis Streamlit app)
 # Install with: pip install -r requirements.txt
 
-streamlit>=1.18.0
-nltk>=3.8.1
-Sastrawi>=1.0.1
-tensorflow>=2.11.0
-numpy>=1.24.0
-pandas>=1.5.3
-scikit-learn>=1.2.2
-h5py>=3.8.0
-joblib>=1.2.0
+streamlit
+nltk
+Sastrawi
+tensorflow
+numpy
+pandas
+scikit-learn
+h5py
+joblib
 
 # Interactive visualizations
-plotly>=5.15.0
+plotly
 
 # If you don't need TensorFlow GPU support, the above `tensorflow` will install
 # a CPU build on most systems. To explicitly install the CPU-only build use:
