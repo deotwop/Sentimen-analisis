@@ -30,17 +30,17 @@ st.set_page_config(
 )
 
 
-# Custom CSS
+# Custom CSS - LIGHT THEME
 st.markdown("""
     <style>
     .stApp {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     }
     
     .header-text {
         font-size: 2.5em;
         font-weight: 700;
-        background: linear-gradient(90deg, #00d4ff, #0099ff);
+        background: linear-gradient(90deg, #0099ff, #00d4ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 10px;
@@ -48,33 +48,33 @@ st.markdown("""
     
     .subheader-text {
         font-size: 1.1em;
-        color: #b0b0b0;
+        color: #333333;
         margin-bottom: 30px;
     }
     
     .metric-card {
-        background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+        background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
         padding: 20px;
         border-radius: 10px;
-        border-left: 4px solid #00d4ff;
+        border-left: 4px solid #0099ff;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
     .stTabs [data-baseweb="tab-list"] {
         gap: 2px;
-        background-color: rgba(15, 52, 96, 0.5);
+        background-color: rgba(230, 240, 255, 0.8);
         padding: 5px;
         border-radius: 8px;
     }
     
     .stTabs [aria-selected="true"] {
-        background-color: #00d4ff;
-        color: #1a1a2e;
+        background-color: #0099ff;
+        color: #ffffff;
     }
     
     .stButton > button {
-        background: linear-gradient(90deg, #00d4ff, #0099ff);
-        color: #1a1a2e;
+        background: linear-gradient(90deg, #0099ff, #00d4ff);
+        color: #ffffff;
         font-weight: 600;
         border: none;
         border-radius: 8px;
@@ -83,8 +83,58 @@ st.markdown("""
     }
     
     .divider {
-        border-top: 1px solid #00d4ff;
+        border-top: 2px solid #0099ff;
         margin: 20px 0;
+    }
+    
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+        color: #1a1a2e;
+    }
+    
+    .stMarkdown p {
+        color: #333333;
+    }
+    
+    .stTextArea textarea {
+        background-color: #ffffff;
+        color: #1a1a2e;
+        border: 2px solid #e0e0e0;
+    }
+    
+    .stSelectbox, .stNumberInput {
+        color: #1a1a2e;
+    }
+    
+    .stInfo {
+        background-color: #e3f2fd;
+        color: #0066cc;
+        border-left-color: #0099ff;
+    }
+    
+    .stSuccess {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        border-left-color: #4caf50;
+    }
+    
+    .stWarning {
+        background-color: #fff3e0;
+        color: #e65100;
+        border-left-color: #ff9800;
+    }
+    
+    .stError {
+        background-color: #ffebee;
+        color: #c62828;
+        border-left-color: #f44336;
+    }
+    
+    [data-testid="stMetricValue"] {
+        color: #0066cc;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        color: #333333;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -306,8 +356,8 @@ def main():
                             st.info(f"### {emoji} Sentimen: **NEUTRAL** 😐", icon="ℹ️")
                         
                         st.markdown(f"""
-                        <div style="background: rgba(0,212,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px;">
-                        <p style="color: #00d4ff; font-weight: 600;">Akurasi: 71.43%</p>
+                        <div style="background: rgba(0,153,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #0099ff;">
+                        <p style="color: #0066cc; font-weight: 600;">Akurasi: 71.43%</p>
                         </div>
                         """, unsafe_allow_html=True)
                     
@@ -323,15 +373,15 @@ def main():
                             st.info(f"### {emoji} Sentimen: **NEUTRAL** 😐", icon="ℹ️")
                         
                         st.markdown(f"""
-                        <div style="background: rgba(0,212,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px;">
-                        <p style="color: #00d4ff; font-weight: 600;">Akurasi: 82.13%</p>
+                        <div style="background: rgba(0,153,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #0099ff;">
+                        <p style="color: #0066cc; font-weight: 600;">Akurasi: 82.13%</p>
                         </div>
                         """, unsafe_allow_html=True)
             else:
                 st.warning("⚠️ Silakan masukkan teks untuk dianalisis!")
     
     # ================================================================
-    # TAB 2: CSV ANALYSIS (FIXED - NO DUPLICATE CHART ERROR)
+    # TAB 2: CSV ANALYSIS
     # ================================================================
     with tab2:
         st.header("Analisis Sentimen dari File CSV")
@@ -419,7 +469,6 @@ def main():
                                 st.subheader("✅ Hasil Analisis")
                                 st.dataframe(results_df, use_container_width=True, height=300)
                                 
-                                # ============= CHARTS WITH UNIQUE KEYS =============
                                 st.markdown("---")
                                 st.subheader("📊 Distribusi Sentimen")
                                 
@@ -440,11 +489,13 @@ def main():
                                         textposition='auto'
                                     ))
                                     fig_nb.update_layout(
-                                        template='plotly_dark',
+                                        template='plotly',
                                         height=400,
                                         showlegend=False,
                                         xaxis_title="Sentimen",
-                                        yaxis_title="Jumlah"
+                                        yaxis_title="Jumlah",
+                                        paper_bgcolor='rgba(255,255,255,1)',
+                                        plot_bgcolor='rgba(240,240,240,1)'
                                     )
                                     st.plotly_chart(fig_nb, use_container_width=True, key='nb_chart_csv')
                                 
@@ -463,15 +514,16 @@ def main():
                                         textposition='auto'
                                     ))
                                     fig_lstm.update_layout(
-                                        template='plotly_dark',
+                                        template='plotly',
                                         height=400,
                                         showlegend=False,
                                         xaxis_title="Sentimen",
-                                        yaxis_title="Jumlah"
+                                        yaxis_title="Jumlah",
+                                        paper_bgcolor='rgba(255,255,255,1)',
+                                        plot_bgcolor='rgba(240,240,240,1)'
                                     )
                                     st.plotly_chart(fig_lstm, use_container_width=True, key='lstm_chart_csv')
                                 
-                                # ============= STATISTICS =============
                                 st.markdown("---")
                                 st.subheader("📈 Statistik")
                                 
@@ -489,7 +541,6 @@ def main():
                                     positive_count = (results_df['Naive Bayes'] == 'positive').sum()
                                     st.metric("Positif (%)", f"{positive_count/len(results_df)*100:.1f}%")
                                 
-                                # ============= DOWNLOAD =============
                                 st.markdown("---")
                                 csv_output = results_df.to_csv(index=False).encode('utf-8')
                                 st.download_button(
@@ -508,17 +559,16 @@ def main():
                 st.error(f"❌ Error: {str(e)}")
                 st.info("💡 Tips: Pastikan file CSV valid")
 
-        # ================================================================
-    # TAB 3: STATISTICS & DATASET OVERVIEW
+    
+    # ================================================================
+    # TAB 3: STATISTICS
     # ================================================================
     with tab3:
         st.header("📈 Statistik Model & Dataset Overview")
         
-        # =============== DATASET OVERVIEW SECTION ===============
         st.subheader("📊 Dataset Overview")
         st.markdown("---")
         
-        # Dataset Info in Columns
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
@@ -533,7 +583,6 @@ def main():
         with col4:
             st.metric("📅 Timeline", "2023-2025")
         
-        # Dataset Details Box
         st.markdown("")
         col1, col2 = st.columns(2)
         
@@ -569,7 +618,6 @@ def main():
         
         st.markdown("---")
         
-        # =============== MODEL STATISTICS SECTION ===============
         st.subheader("🎯 Model Performance Metrics")
         st.markdown("")
         
@@ -583,7 +631,6 @@ def main():
         
         st.markdown("")
         
-        # Model Comparison
         col1, col2 = st.columns(2)
         
         with col1:
@@ -622,10 +669,8 @@ def main():
         
         st.markdown("---")
         
-        # =============== IMPROVEMENT SECTION ===============
         st.subheader("📈 Model Comparison & Improvement")
         
-        # Create comparison data
         comparison_data = {
             'Model': ['Naive Bayes', 'LSTM'],
             'Accuracy': [71.43, 82.13],
@@ -636,7 +681,6 @@ def main():
         comparison_df = pd.DataFrame(comparison_data)
         st.dataframe(comparison_df, use_container_width=True)
         
-        # Improvement Metrics
         improvement_col1, improvement_col2, improvement_col3 = st.columns(3)
         
         with improvement_col1:
@@ -668,7 +712,6 @@ def main():
         
         st.markdown("---")
         
-        # =============== KEY FINDINGS SECTION ===============
         st.subheader("🔍 Key Findings")
         
         col1, col2 = st.columns([1, 2])
@@ -681,44 +724,6 @@ def main():
             LSTM model adalah pilihan optimal untuk sentiment analysis 
             dengan peningkatan akurasi 10.7% dan high confidence dalam prediksi. 
             Preprocessing berkualitas adalah kunci kesuksesan model.
-            """)
-
-
-    
-    # ================================================================
-    # TAB 3: STATISTICS
-    # ================================================================
-    with tab3:
-        st.header("📈 Statistik Model")
-        
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("🎯 Naive Bayes Accuracy", "71.43%")
-        with col2:
-            st.metric("🧠 LSTM Accuracy", "82.13%")
-        with col3:
-            st.metric("📊 Model Agreement", "88.77%")
-        
-        st.markdown("---")
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.markdown("""
-            ### 🤖 Naive Bayes
-            - **Tipe**: Machine Learning Classifier
-            - **Vectorizer**: TF-IDF
-            - **Akurasi**: 71.43%
-            - **Kecepatan**: Sangat cepat ⚡
-            """)
-        
-        with col2:
-            st.markdown("""
-            ### 🧠 LSTM
-            - **Tipe**: Deep Learning (RNN)
-            - **Architecture**: LSTM Layer
-            - **Akurasi**: 82.13% ⭐
-            - **Kecepatan**: Moderate ⏱️
             """)
     
     # ================================================================
